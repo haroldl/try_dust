@@ -1,0 +1,35 @@
+<html>
+
+<head>
+<script src="dust.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<div id="greeting"></div>
+
+<script>
+
+dust.onLoad = function(name, callback) {
+  console.log("load: " + name);
+  $.ajax("templates/" + name + ".tl", {
+    success: function(data) {
+      callback(undefined, data);
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+      callback(textStatus, undefined);
+    }
+  });
+};
+
+dust.render("intro", { name: "Fred" }, function(err, out) {
+  console.log("out: " + out);
+  console.log("err: " + err);
+  $("#greeting").html(out);
+});
+
+</script>
+
+</body>
+</html>
