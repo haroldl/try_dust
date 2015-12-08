@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'application'
+
+mainClassName = 'net.hotelling.harold.trydust.App'
+
+repositories {
+    mavenCentral()
+}
+
+def scalaVersion = '2.12.0-M3'
+
+dependencies {
+  compile group: 'org.scala-lang', name: 'scala-library', version: scalaVersion
+  compile group: 'org.scala-lang', name: 'scala-compiler', version: scalaVersion
+  compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.3.6.v20151106'
+  compile group: 'javax.servlet', name: 'servlet-api', version: '2.4'
+}
+
+task showCachedJars << {
+  configurations.compile.each { println it }
+}
